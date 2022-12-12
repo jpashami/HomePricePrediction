@@ -1,0 +1,264 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage[english]{babel} % To obtain English text with the blindtext package
+\usepackage{blindtext}
+\usepackage{array} 
+\usepackage{float}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\begin{document}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{images/Logo.png}
+\end{figure}
+
+\title{\textbf{Home Price Prediction}}
+\author{Arman Andisheh, Jafar Pashami}
+\date{April 2022}
+
+\maketitle
+
+\tableofcontents
+
+\section{Abstract}
+\emph{Nowadays one a most crucial problems in Canada, especially in Halifax is housing. Lack of availability, exponential increasing prices, and dealing with a reasonable price are a couple of such matters. Considering this issue, We have come up with an idea which is combination of data mining and machine learning and housing. The main goal of our idea is firstly estimation of fair value, then predicting the price of properties. Title of the project is \textbf{"Home Price Prediction"}.
+It is a study for finding the attributes affecting on price of selling/renting a home and creating a machine learning based model for estimation and prediction of the price based on given input parameters.The geographical scope of the project will be Halifax, Nova Scotia, Canada.}
+\subsection{Project Goals}
+\begin{itemize}
+    \item Scraping Data from related advertising platform websites
+    \item Data Prepossessing: Scraped data need to be cleans and transformed to become available for analytical works.
+    \item Attribute Selection: Finding the most relevant attributes that affect the price
+    \item Building a Regression Model for Price Prediction
+    \item Applying the model on other real data to find the accuracy of the model
+\end{itemize}
+
+\subsection{Data set Description}
+We will scrape data from selling/rental advertisements from the web. some websites contains these kind of advertisements we focused on Realtor.ca website.
+
+\section{Introduction}
+\subsection{Problem Description}
+As most of us have touched, one of the most important issues these days, especially in Nova Scotia and Halifax, is housing.Lack of availability and exponential rising in prices are two major issues that cause people to have many problems in planning and budgeting to own a home. Also, Dealing with a fair price is another matter.
+The idea that came to our mind is to use data mining technique in this context and analyze and manipulate the data to achieve a useful and practical model, also providing comprehensives directory of hoses with reliable details.
+\subsection{Key Questions}
+After reviewing and digging into literature and based on our own experience we produced two main questions.
+ 
+\begin{enumerate}
+    \item Is that possible to predict a reliable price through data mining techniques?
+    \item Which attributes do most affect the home price?
+\end{enumerate}
+
+\section{Related Works}
+We browsed various sources and deeply studied literature, and ultimately found several relatively similar examples. We also came across articles on the use of data mining and machine learning techniques in estimating home prices. For instance there are a couple of websites that provide home value estimation services, such as \emph{RedFin} and \emph{Zillow}.
+
+\emph{Zillow} is a useful starting point to help you determine an independent and unbiased assessment of what your home might be worth in today’s market.They claim their error estimation is below 5\%, also they have over 7.5 million properties advertisements. They analyze 58 attributes for a accurate price prediction. Zillow consider a \$ 1 million award for minimizing logerror index.
+
+\emph{RedFin} has a complete and direct access to multiple listing services (MLSs), the databases that real estate agents use to list properties. They use MLS data on recently sold homes in your area to calculate your property's current market value.
+The team uses a combination of many different techniques to keep track of this complexity, including random forest and gradient boosting. Ensemble and hierarchical models are also present, like calculating a walk score and feeding that into the overall estimate. Since it’s a fairly complex problem, the team has built a fairly complex model with a multitude of techniques to make the estimate as accurate as possible. The generate an updated Automating the Comparative Market Analysis (CMA) document, which is a process that real estate professionals use to determine the market value of a property by comparing it to similar properties that have recently sold, as well as to those currently listed for sale.
+
+\section{Methodology}
+To begin, we started to extract data through crawling and scraping techniques on Python and Selenium library.Then we did preprocessing step including cleaning the data on Python and Excel. We also carried out data mining and models evaluation on WEKA and final phase is Knowledge discovery and machine learning stage (figure 1).
+\begin{figure}[H]
+    \centering
+    \includegraphics [scale=0.4]{images/Picture1.png}
+    \caption{Methodology}
+\end{figure}
+
+\section{Data set and Experimental setup}
+In preparing the data set, we investigated the websites of housing advertisements in Nova Scotia and Canada for scrapping data.Because some of these platforms, such as Kijiji, contain fewer variables and, importantly, did not have a coherent structure in data presentation, we decided to find a venue with a more cohesive design and multiple attributes. \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/realtor1.png}
+    \caption{Realtor.ca search results}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{images/realtor2.png} 
+    \caption{Realtor.ca post page}
+\end{figure}
+
+The websites chosen for the data collection was the website of Realtor.ca, which is owned by the Canadian Real Estate Association and receives more than 240 million views annually. This platform has a precisely defined structure for inserting ads and provides more variables from each ad. We collected about 20 variables and 510 selling posts in and around Halifax. \\
+
+To scrape the data, we defined a two-step process. We collected all the links to posts about Halifax properties from realtor.ca website as the first step. Then, using the Selenium and Pandas libraries in Python, we collected each post's content and saved them in a CSV file. After that, it was needed to accomplish a data preprocessing stage to prepare data for analytical purposes. the tools we applied for data preprocessing were Python (Jupyter Notebook and Microsoft Excel).
+Data set contains 510 instances ith 20 attributes ( 7 numeric attributes and 13 nominal attributes). Name of the attributes are in the following:
+\begin{center}
+    \begin{tabular}{ | m{2em} | m{5cm}| m{2.5cm} | m{2cm} |} 
+        \hline
+        index &  Column    &          Non-Null Count & Dtype   \\ 
+        \hline
+        1 &  Price   &            510 non-null &   int64  \\ 
+        2  & Number of Bedrooms     &       510 non-null  &  int64   \\ 
+        3  & Number of Bedrooms including other rooms &      510 non-null &   int64  \\
+        4  & Number of Bathrooms      &     510 non-null  &  int64  \\
+        5  & Property Type    &    510 non-null   & object \\
+        6  & Building Type     &   509 non-null &   object \\
+        7  & Storeys           &  510 non-null  &  int64  \\
+        8  & Community Name &      510 non-null   & object \\
+        9  & Title          &     510 non-null &   object \\
+        10  & Land Size        &    489 non-null  &  object \\
+        11 & Built-in Date         &   404 non-null   & float64\\
+        12 & Parking Type       &  388 non-null &   object \\
+        13 & Total Finished Area  & 509 non-null  &  float64\\
+        14 & Appliances Included & 422 non-null   & object \\
+        15 & Foundation Type    &  479 non-null &   object \\
+        16 & style         &      448 non-null  &  object \\
+        17 & Architecture Style &  199 non-null   & object \\
+        18 & Basement Type      &  350 non-null &   object \\
+        19 & Postal Code (4 first digit) &  510 non-null  &  object \\
+        20 & Postal Code (3 first digit) &  510 non-null   & object \\
+         \hline
+    \end{tabular}
+    \caption{Selected attributes for modeling}
+\end{center}
+The following picture shows the distribution of variables: \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{images/data_distribution.png}
+    \caption{attributes' distributions}
+\end{figure}
+For understanding beter about data, using Seaborn library in Phyton we drawed PairPlot for numeric data. Here is the results:
+\begin{figure}[H]
+    \centering
+    \includegraphics [width=8cm] {images/pairplot.png}
+    \caption{Pair Plot to show relation between numeric attributes}
+\end{figure}
+As you see in this figure (Pair Plot Chart), we can see the relationship between some attributes shown here. for example there is a strong relationship between Price and Total Finished Area or between price and number of bedrooms and bathrooms. It chart leads us to find some influential attributes on price attribute.
+
+The following figure is a heat-map chart that demonstrates the correlation between numeric attributes by colors and numbers:
+\begin{figure}[H]
+\centering
+    \includegraphics [width=6cm] {images/heatmapchart.png}
+    \caption{Heat map chart for illustrating correlation by color}
+\end{figure}
+
+As you can see here the is strong relationship between price and total finished area. \\
+In Appendix 2 what we did for data cleaning and its steps is precisely explained in jupyter notebook. \\ 
+\section{Results}
+After preparing the data set we uploaded data to Weka as our machine learning tools. Because of the nature of our data set and our question we applied regression techniques on data. \\
+Based on our literature review we selected four regression method to apply on data: 
+\subsection{Linear Regression}
+After applying Linear regression on 20 attribute data set the results are below: \\
+\begin{figure}[H]
+\centering
+    \includegraphics[width=6cm]{images/LinearRegression1.png} 
+    \caption{Linear regression results in Weka}
+\end{figure}
+In this picture as you see, Correlation coefficient is -0.0969 and Root relative squared error is 100\% both of these indicator means that we couldn't find a meaningful model using regression.
+\subsection{SMO Regression}
+We applied SMO regression on our data set in Weka. the results are as below:\\
+\begin{figure}[H]
+\centering
+    \includegraphics[width=6cm]{images/SMOreg.png}
+    \caption{SMO regression results in Weka}
+\end{figure}
+In this figure, it is shown that Correlation coefficient is 0.58 and Root relative squared error is 93.59\%. it is better in correlation coefficient however the error is still very high.
+\subsection{K-nearest neighbor's classifier}
+thee third algorithm that we applied on data was K-nearest neighbor. the results are as below: \\
+\begin{figure}[H]
+\centering
+    \includegraphics[width=6cm]{images/knearest.png}
+    \caption{K-nearest neighbor's results in Weka}
+\end{figure}
+As the result, Correlation coefficient is 0.57 and Root relative squared error is about 83.86\%. The method is also near to SMOreg with lower RRSe (Root Relative Square error).
+\subsection{Random Forrest classifier}
+thee forth algorithm was Random Forrest. the results are as below: 
+\begin{figure}[H]
+\centering
+    \includegraphics[width=6cm]{images/Randomforest.png}
+    \caption{Random Forest results in Weka}
+\end{figure}
+As the result, Correlation coefficient is 0.72 and Root relative squared error is 71.37\%. Random Forrest demonstrate much better performance between other three classification/Regression algorithms.
+\subsection{Models evaluation} 
+After applying these four algorithm on our data set, now we tried to enhance our results by performing some changes in our data and attributes. \\
+At first, we normalized data using normalizer filter in Weka. then we applied all algorithms again to see the results. as you can see normalization didn't make any significant changes in our results. \\ 
+\begin{figure}[H]
+\centering
+    \includegraphics[width=10cm]{images/model_evaluation.png}
+    \caption{Model evaluation based on Correlation coef. and rrse in four examination using each algorithm}
+\end{figure} 
+In the next step, we reduce the number of attributes from 20 attributes to 14 attributes by removeing imbalanced distribution of the attributes.for finding imbalanced attributes we looked at the distribution of each attribute then we decided to remove the attributes that were imballanced and also don't use in other studies we found in our litreature review.For learning more how to deal with imbalanced data please see the below links: \\
+%\begin{list}
+   % \item 
+\url{https://developers.google.com/machine-learning/data-prep/construct/sampling-splitting/imbalanced-data} \\
+   % \item \url{https://ieeexplore.ieee.org/document/5670030/references#references} 
+   % \item \url{https://machinelearningmastery.com/what-is-imbalanced-classification/}
+% \end{list}
+Following table indicates the remaining variables: 
+\begin{center}
+    \begin{tabular}{ | m{2em} | m{5cm}| m{2.5cm} | m{2cm} |} 
+        \hline
+        index &  Column    &          Non-Null Count & Dtype   \\ 
+        \hline
+        1 &  Price   &            510 non-null &   int64  \\ 
+        2  & Number of Bedrooms     &       510 non-null  &  int64   \\ 
+        3 & Number of Bedrooms including other rooms &      510 non-null &   int64  \\
+         4  & Number of Bathrooms      &     510 non-null  &  int64  \\
+         5  & Building Type     &   509 non-null &   object \\
+         6  & Storeys           &  510 non-null  &  int64  \\
+         7  & Title          &     510 non-null &   object \\
+         8  & Land Size        &    489 non-null  &  object \\
+         9 & Built-in Date         &   404 non-null   & float64\\
+         10 & Total Finished Area  & 509 non-null  &  float64\\
+         11 & style         &      448 non-null  &  object \\
+         12 & Basement Type      &  350 non-null &   object \\
+         13 & Postal Code (4 first digit) &  510 non-null  &  object \\
+         14 & Postal Code (3 first digit) &  510 non-null   & object \\
+         \hline
+    \end{tabular} 
+    \caption{Selected attributes for modeling after attribute reduction}
+\end{center}
+After reducing the attributes to 14 attributes we can see a significant improvement in Linear Regression results and also in time of executing and creating model. 
+In addition, we saw enhancement in other algorithms results except random forest.\\ 
+In the last step, again we reduced the number of attributes to 7 attributes and examine all four algorithms based on these 7 attributes. As you see, by decreasing more attributes, in some algorithms, there are slightly enhancement and on the other hand for k-nearest neighbor algorithm we got less accuracy and higher error. The list of seven remaining attributes are in the following table:\\
+\begin{center}
+    \begin{tabular}{ | m{2em} | m{5cm}| m{2.5cm} | m{2cm} |} 
+        \hline
+        index &  Column & Non-Null Count & Dtype \\ 
+        \hline
+        1 &  Price   &            510 non-null &   int64  \\ 
+        2  & Number of Bedrooms     &       510 non-null  &  int64   \\ 
+        3 & Number of Bedrooms including other rooms &      510 non-null &   int64  \\
+         4  & Number of Bathrooms      &     510 non-null  &  int64  \\
+         5 & Built-in Date         &   404 non-null   & float64\\
+         6 & Total Finished Area  & 509 non-null  &  float64\\
+         7 & Postal Code (3 first digit) &  510 non-null   & object \\
+         \hline
+    \end{tabular}
+    \caption{Selected attributes for modeling in last step}
+\end{center}
+\section{Conclusion and future works}
+In this study, which aimed to create a comprehensive platform of Halifax homes with the ability to estimate and predict prices, due to some time constraints in data collection, did not lead to the expected result or machine learning process.\\
+
+Doing this project gave us interesting information that can be divided into two main parts: technical part and theoretical part. First, the issues of data mining and data collection are far more complex than they seem, and not merely a science dependent on tools and algorithms.\\
+
+According to what we did in this study and limitations in terms of data and time, we have several suggestions to researchers in the future:
+\begin{itemize}
+    \item By increasing the data as much as possible, the reliability of the models can be better, and would decrease the errors.
+    \item Another factor that we think can improve outputs is the increase in the geographic area in which data is collected, would give us a more comprehensive insight.
+    \item This study is based on sell and buy price, however digging into rental market could be another work in the future.
+    \item A couple of macro variables such as fluctuation can be considered.
+    \item One of the variables that can affect our independent variable is the time series attribute. That is, considering price changes over different periods.
+    \item Social media impact: REVIEWS AND FEED BACKS and bring it into analyzing and price prediction
+\end{itemize}
+\section{References}
+\section{Appendix 1: Scarping codes} 
+%\input{Realtor_linkScrap3}
+%\include{Realtor_linkScrap3}
+%\include{RealtorCa_SeleniumScaring_RealEstatePage_v3.6}
+\section{Appendix 2: Data Cleaning Instructions}
+%\include{DataCleaning}
+\section{Appendix 3: Data analysing and Data Visualization using python}
+%\include{Home Price Estimator_v1}
+
+\end{document}
